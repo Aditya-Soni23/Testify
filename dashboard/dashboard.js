@@ -5,7 +5,7 @@ import { ref, onValue, query, limitToLast } from "https://www.gstatic.com/fireba
 document.addEventListener("DOMContentLoaded", () => {
     // 1. Auth & Initial setup
     checkAuthState((user, dbUser) => {
-        if (!user) { window.location.href = '/'; return; }
+        if (!user) { window.location.href = '../index.html'; return; } 
         
         document.getElementById('user-greeting').innerHTML = `Good day, <span>${dbUser.name.split(' ')[0]}</span>`;
         initNavigationRoutes();
@@ -45,14 +45,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
 function initNavigationRoutes() {
     const mappings = { 
-        'nav-dashboard': '/dashboard/dashboard.html', 
-        'nav-tests': '/tests/tests.html', 
-        'nav-polling': '/polling/polling.html', 
-        'nav-upload': '/upload/upload.html', 
-        'nav-chat': '/chat/chat.html', 
-        'nav-tutorial': '/tutorial/tutorial.html' 
+        'nav-dashboard': 'dashboard.html', 
+        'nav-tests': '../tests/tests.html', 
+        'nav-polling': '../polling/polling.html', 
+        'nav-upload': '../upload/upload.html', 
+        'nav-chat': '../chat/chat.html', 
+        'nav-tutorial': '../tutorial/tutorial.html' 
     };
-
     Object.keys(mappings).forEach(id => {
         const navItem = document.getElementById(id);
         if (navItem) {
@@ -78,7 +77,7 @@ function listenToSystemStatesLifecycle() {
                 <div style="border-left:4px solid var(--accent-purple); padding-left:1rem;">
                     <h4 style="margin:0; color:white;">Status: Voting window is live!</h4>
                     <p style="font-size:0.85rem; color:var(--text-muted); margin-top:0.25rem;">Students are deciding configuration parameters.</p>
-                    <button class="btn" onclick="window.location.href='/polling/polling.html'" style="width:auto; padding:0.4rem 0.8rem; font-size:0.8rem; background:var(--accent-purple); color:white; margin-top:0.5rem; border:none; border-radius:4px; cursor:pointer;">Cast Vote</button>
+                    <button class="btn" onclick="window.location.href='../polling/polling.html'" style="width:auto; padding:0.4rem 0.8rem; font-size:0.8rem; background:var(--accent-purple); color:white; margin-top:0.5rem; border:none; border-radius:4px; cursor:pointer;">Cast Vote</button>
                 </div>
             `;
         } else if (state.status === 'uploading') {
@@ -86,7 +85,7 @@ function listenToSystemStatesLifecycle() {
                 <div style="border-left:4px solid var(--accent-blue); padding-left:1rem;">
                     <h4 style="margin:0; color:white;">Status: Questions uploading window is live!</h4>
                     <p style="font-size:0.85rem; color:var(--text-muted); margin-top:0.25rem;">Target Profile Configuration: ${state.subject} [${state.mode}]</p>
-                    <button class="btn" onclick="window.location.href='/upload/upload.html'" style="width:auto; padding:0.4rem 0.8rem; font-size:0.8rem; background:var(--accent-blue); color:white; margin-top:0.5rem; border:none; border-radius:4px; cursor:pointer;">Contribute Questions</button>
+                    <button class="btn" onclick="window.location.href='../upload/upload.html'" style="width:auto; padding:0.4rem 0.8rem; font-size:0.8rem; background:var(--accent-blue); color:white; margin-top:0.5rem; border:none; border-radius:4px; cursor:pointer;">Contribute Questions</button>
                 </div>
             `;
         } else {
@@ -94,7 +93,7 @@ function listenToSystemStatesLifecycle() {
                 <div style="border-left:4px solid var(--success); padding-left:1rem;">
                     <h4 style="margin:0; color:white;">Status: Exam Module Compiled & Live</h4>
                     <p style="font-size:0.85rem; color:var(--text-muted); margin-top:0.25rem;">The generated exam is live on servers.</p>
-                    <button class="btn" onclick="window.location.href='/tests/tests.html'" style="width:auto; padding:0.4rem 0.8rem; font-size:0.8rem; background:var(--success); color:white; margin-top:0.5rem; border:none; border-radius:4px; cursor:pointer;">Launch Exam</button>
+                    <button class="btn" onclick="window.location.href='../tests/tests.html'" style="width:auto; padding:0.4rem 0.8rem; font-size:0.8rem; background:var(--success); color:white; margin-top:0.5rem; border:none; border-radius:4px; cursor:pointer;">Launch Exam</button>
                 </div>
             `;
         }

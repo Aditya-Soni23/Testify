@@ -6,7 +6,7 @@ import { ref, get, onValue } from "https://www.gstatic.com/firebasejs/10.8.0/fir
 onValue(ref(db, 'system_state/maintenance'), (snapshot) => {
     if (snapshot.exists() && snapshot.val() === true) {
         if (!window.location.href.includes('maintenance.html')) {
-            window.location.href = '/maintenance/maintenance.html';
+            window.location.href = './maintenance/maintenance.html';
         }
     }
 });
@@ -32,7 +32,7 @@ if (logoBtn) {
         if (clickCount >= 5) {
             checkAuthState((user) => {
                 if (user && user.email === 'adityasonihyderabad@gmail.com') {
-                    window.location.href = '/admin/admin.html';
+                    window.location.href = './admin/admin.html';
                 } else {
                     alert("Unauthorized. Admin access sequence locked.");
                 }
@@ -46,7 +46,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // --- PWA SERVICE WORKER REGISTRATION ---
     if ('serviceWorker' in navigator) {
         window.addEventListener('load', () => {
-            navigator.serviceWorker.register('/sw.js')
+            navigator.serviceWorker.register('./sw.js')
                 .then(reg => console.log('Service Worker Registered Successfully. Scope:', reg.scope))
                 .catch(err => console.error('Service Worker Registration Failed:', err));
         });
@@ -56,7 +56,7 @@ document.addEventListener("DOMContentLoaded", () => {
     checkAuthState((user, dbUser) => {
         if (user && dbUser && dbUser.name) {
             if (!window.location.href.includes('dashboard')) {
-                window.location.href = '/dashboard/dashboard.html';
+                window.location.href = './dashboard/dashboard.html';
             }
         }
     });

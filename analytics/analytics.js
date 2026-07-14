@@ -7,12 +7,12 @@ let accuracyChartInstance = null;
 
 document.addEventListener("DOMContentLoaded", () => {
     checkAuthState(async (user) => {
-        if (!user) { window.location.href = '/'; return; }
+        if (!user) { window.location.href = '../index.html'; return; }
         currentUser = user;
         
         // Navigation setup
-        document.getElementById('nav-dashboard').onclick = () => window.location.href = '/dashboard/dashboard.html';
-        document.getElementById('nav-tests').onclick = () => window.location.href = '/tests/tests.html';
+        document.getElementById('nav-dashboard').onclick = () => window.location.href = '../dashboard/dashboard.html';
+        document.getElementById('nav-tests').onclick = () => window.location.href = '../tests/tests.html';
         
         await loadAvailableTests();
     });
@@ -29,7 +29,7 @@ document.addEventListener("DOMContentLoaded", () => {
             alert("Please select an exam to review first.");
             return;
         }
-        window.location.href = `/exam/exam.html?id=${selectedTestId}&mode=review`;
+        window.location.href = `../exam/exam.html?id=${selectedTestId}&mode=review`;
     });
 
 });

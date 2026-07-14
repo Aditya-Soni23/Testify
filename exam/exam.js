@@ -22,12 +22,12 @@ document.addEventListener("DOMContentLoaded", () => {
     
     if (!testId) {
         alert("Fatal Error: Target evaluation contextual token signature is missing.");
-        window.location.href = '/tests/tests.html';
+        window.location.href = '../tests/tests.html';
         return;
     }
 
     checkAuthState((user, dbUser) => {
-        if (!user) { window.location.href = '/'; return; }
+        if (!user) { window.location.href = '../index.html'; return; }
         currentUser = { ...user, displayName: dbUser.name, photoURL: user.photoURL };
         bootstrapEvaluationWorkspace();
     });
@@ -50,7 +50,7 @@ async function bootstrapEvaluationWorkspace() {
         // Normal mode execution barrier
         if (!isReviewMode && progressState.metadata && progressState.metadata.status === 'Completed') {
             alert("This module examination lifecycle has already concluded.");
-            window.location.href = '/tests/tests.html';
+            window.location.href = '../tests/tests.html';
             return;
         }
 
@@ -82,7 +82,7 @@ async function bootstrapEvaluationWorkspace() {
             `;
 
             backBtn.onclick = () => {
-                window.location.href = "/dashboard/dashboard.html";
+                window.location.href = "../dashboard/dashboard.html";
             };
 
             document.body.appendChild(backBtn);
@@ -202,7 +202,7 @@ function initializeInteractiveUIPanelElements() {
             e.target.innerHTML = "Processing...";
             e.target.disabled = true;
             await processAndSubmitExam(currentUser.uid, testId, currentUser.displayName, currentUser.photoURL);
-            window.location.href = '/dashboard/dashboard.html'; 
+            window.location.href = '../dashboard/dashboard.html'; 
         });
     }
 }
@@ -505,7 +505,7 @@ function setupAntiCheatMonitoring() {
                 // Show processing state and auto-submit
                 if (globalCountdownTimerInterval) clearInterval(globalCountdownTimerInterval);
                 await processAndSubmitExam(currentUser.uid, testId, currentUser.displayName, currentUser.photoURL);
-                window.location.href = '/dashboard/dashboard.html';
+                window.location.href = '../dashboard/dashboard.html';
             }
         }
     });
@@ -532,7 +532,7 @@ function beginActiveCountdownProcessingLoop() {
             isExamActive = false; // Stop anti-cheat triggers
             alert("Time Limit Constraint Hit. Your exam will now be submitted.");
             await processAndSubmitExam(currentUser.uid, testId, currentUser.displayName, currentUser.photoURL);
-            window.location.href = `/dashboard/dashboard.html`;
+            window.location.href = `../dashboard/dashboard.html`;
             return;
         }
         

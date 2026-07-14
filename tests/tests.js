@@ -7,7 +7,7 @@ import { ref, get } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-dat
 document.addEventListener("DOMContentLoaded", () => {
     checkAuthState(async (user, dbUser) => {
         if (!user || !dbUser) {
-            window.location.href = '/';
+            window.location.href = '../index.html';
             return;
         }
         await renderExamDashboard(user.uid);
@@ -76,13 +76,13 @@ async function renderExamDashboard(uid) {
 
         document.querySelectorAll('.action-trigger').forEach(btn => {
             btn.addEventListener('click', (e) => {
-                window.location.href = `/exam/exam.html?id=${e.target.dataset.id}`;
+                window.location.href = `../exam/exam.html?id=${e.target.dataset.id}`;
             });
         });
 
         document.querySelectorAll('.action-results').forEach(btn => {
             btn.addEventListener('click', () => {
-                window.location.href = `/analytics/analytics.html`;
+                window.location.href = `../analytics/analytics.html`;
             });
         });
     }

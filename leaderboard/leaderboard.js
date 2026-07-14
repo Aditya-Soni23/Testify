@@ -5,7 +5,7 @@ import { ref, get } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-dat
 document.addEventListener("DOMContentLoaded", () => {
     checkAuthState(async (user, dbUser) => {
         if (!user || !dbUser) {
-            window.location.href = '/';
+            window.location.href = '../index.html';
             return;
         }
         await setupLeaderboardContext();

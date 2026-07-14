@@ -2,59 +2,58 @@
 const CACHE_NAME = 'testify-v1'; 
 
 const ASSETS_TO_CACHE = [
-  // Core Root Files
-  '/',
-  '/index.html',
-  '/style.css',
-  '/manifest.json',
-  '/logotestify.png',
-  '/logo.png',
-  '/main.js', // Assuming your main.js from the previous step is in the root
-
-  // Core JS Logic
-  '/js/auth.js',
-  '/js/database.js',
-  '/js/dbSeed.js',
-  '/js/examEngine.js',
-  '/js/firebase.js',
-  '/js/utils.js',
-
-  // Dashboard
-  '/dashboard/dashboard.html',
-  '/dashboard/dashboard.css',
-  '/dashboard/dashboard.js',
-
-  // Exam Engine & Tests
-  '/exam/exam.html',
-  '/exam/exam.css',
-  '/exam/exam.js',
-  '/tests/tests.html',
-  '/tests/tests.css',
-  '/tests/tests.js',
-
-  // Interactive Modules
-  '/polling/polling.html',
-  '/polling/polling.css',
-  '/polling/polling.js',
-  '/upload/upload.html',
-  '/upload/upload.css',
-  '/upload/upload.js',
-  '/chat/chat.html',
-  '/chat/chat.css',
-  '/chat/chat.js',
-  '/leaderboard/leaderboard.html',
-  '/leaderboard/leaderboard.css',
-  '/leaderboard/leaderboard.js',
-
-  // Data & Others
-  '/analytics/analytics.html',
-  '/analytics/analytics.css',
-  '/analytics/analytics.js',
-  '/tutorial/tutorial.html',
-  '/mobile/mobile.css',
-  '/mobile/mobile.js'
-];
-
+    // Core Root Files
+    './',
+    'index.html',
+    'style.css',
+    'manifest.json',
+    'logotestify.png',
+    'logo.png',
+    'main.js',
+  
+    // Core JS Logic
+    'js/auth.js',
+    'js/database.js',
+    'js/dbSeed.js',
+    'js/examEngine.js',
+    'js/firebase.js',
+    'js/utils.js',
+  
+    // Dashboard
+    'dashboard/dashboard.html',
+    'dashboard/dashboard.css',
+    'dashboard/dashboard.js',
+  
+    // Exam Engine & Tests
+    'exam/exam.html',
+    'exam/exam.css',
+    'exam/exam.js',
+    'tests/tests.html',
+    'tests/tests.css',
+    'tests/tests.js',
+  
+    // Interactive Modules
+    'polling/polling.html',
+    'polling/polling.css',
+    'polling/polling.js',
+    'upload/upload.html',
+    'upload/upload.css',
+    'upload/upload.js',
+    'chat/chat.html',
+    'chat/chat.css',
+    'chat/chat.js',
+    'leaderboard/leaderboard.html',
+    'leaderboard/leaderboard.css',
+    'leaderboard/leaderboard.js',
+  
+    // Data & Others
+    'analytics/analytics.html',
+    'analytics/analytics.css',
+    'analytics/analytics.js',
+    'tutorial/tutorial.html',
+    'mobile/mobile.css',
+    'mobile/mobile.js'
+  ];
 // ... (Keep the rest of the install, activate, and fetch events exactly the same) ...
 
 // Install Event - Cache Core Static Assets

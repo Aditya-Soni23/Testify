@@ -12,7 +12,7 @@ let editingQId = null;
 
 document.addEventListener("DOMContentLoaded", () => {
     checkAuthState((user, dbUser) => {
-        if (!user) { window.location.href = '/'; return; }
+        if (!user) { window.location.href = '../index.html'; return; }
         currentUserId = user.uid;
         currentUserName = dbUser.name;
         initInterfaceUtilities();
@@ -20,7 +20,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 function initInterfaceUtilities() {
-    const mappings = { 'nav-dashboard': '/dashboard/dashboard.html', 'nav-tests': '/tests/tests.html', 'nav-polling': '/polling/polling.html', 'nav-upload': '/upload/upload.html', 'nav-chat': '/chat/chat.html' };
+    const mappings = { 'nav-dashboard': '../dashboard/dashboard.html', 'nav-tests': '../tests/tests.html', 'nav-polling': '../polling/polling.html', 'nav-upload': '../upload/upload.html', 'nav-chat': '../chat/chat.html' };
     Object.keys(mappings).forEach(id => document.getElementById(id)?.addEventListener('click', () => window.location.href = mappings[id]));
 
     document.getElementById('tab-manual').addEventListener('click', () => toggleTabs('manual'));
@@ -115,7 +115,7 @@ function bindDataPipelineStreams() {
     <h2>Window Closed!</h2>
     <p>Move on to the next Polling or Write the Test!</p>
 
-    <a href="/tests/tests.html" style="text-decoration:none;">
+    <a href="../tests/tests.html" style="text-decoration:none;">
         <button style="
             margin-top:20px;
             padding:12px 28px;
@@ -366,5 +366,5 @@ async function executeAutoTestCompilation(pool) {
     
     alert("Test is live!");
     // Redirects user to tests, while the polling window silently resets in the background
-    window.location.href = '/tests/tests.html'; 
+    window.location.href = '../tests/tests.html';
 }

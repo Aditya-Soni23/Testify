@@ -2,7 +2,7 @@
     "name": "Testify Dashboard",
     "short_name": "Testify",
     "description": "Dynamic Space Dashboard built by Diamond.",
-    "start_url": "/index.html",
+    "start_url": "./index.html",
     "display": "standalone",
     "background_color": "#1a1a2e",
     "theme_color": "#1a1a2e",

@@ -20,7 +20,7 @@
         <div class="logo">
             <i class="ph ph-atom"></i> Testify
         </div>
-        <a href="/" class="diamond-brand">
+        <a href="./index.html" class="diamond-brand">
             <img src="logo.png" alt="Diamond Logo">
             <span>Built by <strong>DIAMOND</strong>~Aditya Soni</span>
         </a>
@@ -79,7 +79,7 @@
     <script>
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
-                navigator.serviceWorker.register('/sw.js')
+                navigator.serviceWorker.register('./sw.js')
                     .then(reg => console.log('Service Worker Registered Successfully. Scope:', reg.scope))
                     .catch(err => console.error('Service Worker Registration Failed:', err));
             });

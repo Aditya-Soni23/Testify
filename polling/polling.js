@@ -7,7 +7,7 @@ let currentUserName = null;
 
 document.addEventListener("DOMContentLoaded", () => {
     checkAuthState((user, dbUser) => {
-        if (!user) { window.location.href = '/'; return; }
+        if (!user) { window.location.href = '../index.html'; return; }
         currentUserId = user.uid;
         currentUserName = dbUser.name;
         initNavigation();
@@ -16,7 +16,7 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 function initNavigation() {
-    const mappings = { 'nav-dashboard': '/dashboard/dashboard.html', 'nav-tests': '/tests/tests.html', 'nav-polling': '/polling/polling.html', 'nav-upload': '/upload/upload.html', 'nav-chat': '/chat/chat.html' };
+    const mappings = { 'nav-dashboard': '../dashboard/dashboard.html', 'nav-tests': '../tests/tests.html', 'nav-polling': '../polling/polling.html', 'nav-upload': '../upload/upload.html', 'nav-chat': '../chat/chat.html' };
     Object.keys(mappings).forEach(id => {
         document.getElementById(id)?.addEventListener('click', () => window.location.href = mappings[id]);
     });
@@ -172,7 +172,7 @@ function renderClosedPollMetrics(state) {
             </div>
             
             <div style="margin-top: 1.5rem;">
-                <button class="btn btn-primary w-100" onclick="window.location.href='/upload/upload.html'">Proceed contribute Questions</button>
+                <button class="btn btn-primary w-100" onclick="window.location.href='../upload/upload.html'">Proceed contribute Questions</button>
             </div>
         </div>
     `;

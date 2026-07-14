@@ -9,7 +9,7 @@ let activeReplyTargetState = null;
 
 document.addEventListener("DOMContentLoaded", () => {
     checkAuthState((user, dbUser) => {
-        if (!user) { window.location.href = '/'; return; }
+        if (!user) { window.location.href = '../index.html'; return; }
         currentUserId = user.uid;
         currentUserName = dbUser.name;
         currentUserPhoto = dbUser.photoURL || `https://api.dicebear.com/7.x/bottts/svg?seed=${user.uid}`;
@@ -19,7 +19,7 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 function initLayoutHandlers() {
-    const mappings = { 'nav-dashboard': '/dashboard/dashboard.html', 'nav-tests': '/tests/tests.html', 'nav-polling': '/polling/polling.html', 'nav-upload': '/upload/upload.html', 'nav-chat': '/chat/chat.html' };
+    const mappings = { 'nav-dashboard': '../dashboard/dashboard.html', 'nav-tests': '../tests/tests.html', 'nav-polling': '../polling/polling.html', 'nav-upload': '../upload/upload.html', 'nav-chat': '../chat/chat.html' };
     Object.keys(mappings).forEach(id => document.getElementById(id)?.addEventListener('click', () => window.location.href = mappings[id]));
 
     // Emojis Utilities Action Toggles Setup
