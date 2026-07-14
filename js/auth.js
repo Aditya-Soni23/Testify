@@ -6,6 +6,7 @@ import { showToast } from './utils.js';
 const provider = new GoogleAuthProvider();
 const isGitHubPages = window.location.hostname.includes('github.io');
 const repoName = isGitHubPages ? `/${window.location.pathname.split('/')[1]}` : '';
+
 export async function handleGoogleLogin() {
     try {
         const result = await signInWithPopup(auth, provider);
@@ -57,7 +58,8 @@ function triggerNamePrompt(firebaseUser) {
             await createUserData(firebaseUser.uid, firebaseUser.email, firebaseUser.photoURL, realName);
             
             showToast('Profile created successfully!', 'success');
-            window.location.href = '/dashboard/dashboard.html';
+            // ✅ FIX: Added dynamic repoName mapping for new user redirection
+            window.location.href = `${window.location.origin}${repoName}/dashboard/dashboard.html`;
         } catch (error) {
             showToast('Error saving profile.', 'error');
             btn.innerHTML = 'Save & Continue';
@@ -79,7 +81,8 @@ export function checkAuthState(callback) {
 
 export function logoutUser() {
     signOut(auth).then(() => {
-        window.location.href = '/';
+        // ✅ FIX: Redirects back to your GitHub Pages repository landing index.html instead of the bare domain
+        window.location.href = `${window.location.origin}${repoName}/index.html`;
     }).catch((error) => {
         showToast('Error logging out.', 'error');
     });
