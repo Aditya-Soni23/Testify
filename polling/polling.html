@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Collaborative Polling | Testify</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <link rel="icon" type="image/png" sizes="32x32" href="/logo.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/logo.png">
+    <link rel="apple-touch-icon" href="/logo.png">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="polling.css">
+    <link rel="stylesheet" href="../mobile/mobile.css">
+    <link rel="manifest" href="/manifest.json">
+    <script src="../mobile/mobile.js"></script>
+</head>
+<body class="dashboard-body">
+    <div id="sidebar-overlay" class="sidebar-overlay"></div>
+    <aside class="sidebar glass">
+        <div class="sidebar-header"><i class="ph ph-atom logo-icon"></i> <span class="logo-text">Testify</span></div>
+        <ul class="nav-menu">
+            <li id="nav-dashboard"><i class="ph ph-squares-four"></i> Dashboard</li>
+            <li id="nav-tests"><i class="ph ph-exam"></i> Tests</li>
+            <li class="active" id="nav-polling"><i class="ph ph-chart-bar"></i> Polling</li>
+            <li id="nav-upload"><i class="ph ph-upload"></i> Upload</li>
+            <li id="nav-chat"><i class="ph ph-chats-circle"></i> Chat</li>
+        </ul>
+    </aside>
+
+    <main class="main-content">
+        <header class="poll-header glass">
+            <button id="mobile-menu-btn" class="hamburger-btn" aria-label="Toggle Menu">
+                <i class="ph ph-list"></i>
+            </button>
+            <div>
+                <h1>Collaborative Polling</h1>
+                <p>Cast your configuration parameters. The next operational testing module auto-builds dynamically from standard user distribution densities.</p>
+                <p>If this page fails to load, either refresh the page or go to the Upload Menu.</p>
+            </div>
+            <div id="poll-timer-container" class="timer-badge hidden">
+                <i class="ph ph-hourglass-high"></i> <span id="countdown-timer">00:00:00</span>
+            </div>
+        </header>
+
+        <div class="polling-workspace">
+            <!-- Active Entry Form -->
+            <section id="voting-panel" class="card glass hidden">
+                <h2>Configure Target Metrics</h2>
+                <form id="poll-form">
+                    <div class="form-group">
+                        <label>Core Subject</label>
+                        <select id="poll-subject" required>
+                            <option value="Physics">Physics</option>
+                            <option value="Chemistry">Chemistry</option>
+                            <option value="Mathematics">Mathematics</option>
+                            <option value="Mixed">Mixed Syllabus</option>
+                        </select>
+                    </div>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label>Target Volumetric Size</label>
+                            <select id="poll-count" required>
+                                <option value="10">10 Questions</option>
+                                <option value="20">20 Questions</option>
+                                <option value="25">25 Questions</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Allotted Exam Time</label>
+                            <select id="poll-duration" required>
+                                <option value="30">30 Minutes</option>
+                                <option value="60">1 Hour</option>
+                                <option value="120">2 Hours</option>
+                                <option value="180">3 Hours</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Structural Test Pattern Mode</label>
+                        <select id="poll-mode" required>
+                            <option value="JEE Main">JEE Main</option>
+                            <option value="JEE Advanced">JEE Advanced</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Target Focus Chapters (Comma Separated)</label>
+                        <input type="text" id="poll-chapters" placeholder="Electrostatics, Current Electricity, Capacitance" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+            </section>
+
+            <!-- Status Updates & Live Counters -->
+            <section id="status-panel" class="card glass">
+                <div class="progress-container">
+                    <h3>Active Student Participation Votes</h3>
+                    <div class="progress-bar-wrapper">
+                        <div id="vote-progress" class="progress-fill" style="width: 0%"></div>
+                    </div>
+                    <p id="vote-ratio-text">0 / 0 Registered Accounts Voted</p>
+                </div>
+                
+                <hr class="divider">
+                
+                <h3>Live Voting Ledger</h3>
+                <div id="voters-ledger" class="ledger-box"></div>
+            </section>
+        </div>
+    </main>
+    <script type="module" src="polling.js"></script>
+</body>
+</html>

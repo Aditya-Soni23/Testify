@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Performance Analytics | Testify</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="manifest" href="/manifest.json">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="../dashboard/dashboard.css">
+    <link rel="stylesheet" href="analytics.css">
+    <link rel="icon" type="image/png" sizes="32x32" href="/logo.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/logo.png">
+<link rel="apple-touch-icon" href="/logo.png">
+<link rel="stylesheet" href="../mobile/mobile.css">
+    <script src="../mobile/mobile.js"></script>
+</head>
+<body class="dashboard-body">
+    <div id="sidebar-overlay" class="sidebar-overlay"></div>
+    <aside class="sidebar glass">
+        <div class="sidebar-header"><i class="ph ph-atom logo-icon"></i> <span class="logo-text">Testify</span></div>
+        <ul class="nav-menu">
+            <li id="nav-dashboard"><i class="ph ph-squares-four"></i> Dashboard</li>
+            <li id="nav-tests"><i class="ph ph-exam"></i> Tests</li>
+            <li class="active" id="nav-analytics"><i class="ph ph-chart-polar"></i> Analytics</li>
+        </ul>
+    </aside>
+
+    <main class="main-content">
+        <header class="topbar glass">
+            <button id="mobile-menu-btn" class="hamburger-btn" aria-label="Toggle Menu">
+                <i class="ph ph-list"></i>
+            </button>
+            <div>
+                <h1>Deep Analytics</h1>
+                <p class="subtitle">Review your performance across community tests.</p>
+            </div>
+            <select id="test-selector" class="glass-select">
+                <option value="">Loading Tests...</option>
+            </select>
+        </header>
+
+        <div id="analytics-error" class="card glass hidden" style="text-align: center; padding: 4rem;">
+            <i class="ph ph-lock-key" style="font-size: 3rem; color: var(--text-muted);"></i>
+            <h2 style="margin-top: 1rem;">Attempt Required</h2>
+            <p style="color: var(--text-muted);">You must complete this test before viewing analytics.</p>
+            <button class="btn btn-primary" style="margin-top: 1rem;" onclick="window.location.href='/tests/tests.html'">Go to Tests</button>
+        </div>
+
+        <div id="analytics-content" class="hidden">
+            <div class="stats-grid">
+                <div class="stat-card glass">
+                    <h3>Score</h3>
+                    <div class="stat-value" id="stat-marks">--</div>
+                    <div class="stat-sub">Out of <span id="stat-total-marks">--</span></div>
+                </div>
+                <div class="stat-card glass">
+                    <h3>Accuracy</h3>
+                    <div class="stat-value text-blue" id="stat-accuracy">--%</div>
+                    <div class="stat-sub">Precision Rate</div>
+                </div>
+                <div class="stat-card glass">
+                    <h3>Correct / Wrong</h3>
+                    <div class="stat-value text-green"><span id="stat-correct">--</span> / <span id="stat-wrong" class="text-red">--</span></div>
+                    <div class="stat-sub"><span id="stat-skipped">--</span> Skipped</div>
+                </div>
+            </div>
+
+            <div class="charts-container">
+                <div class="chart-card glass">
+                    <h3>Accuracy Distribution</h3>
+                    <canvas id="accuracyChart"></canvas>
+                </div>
+               
+                <div class="chart-card glass">
+                    <div class="stat-card glass">
+                        <h3>Test Time</h3>
+                        <div class="stat-value text-blue" id="stat-time">--m --s</div>
+                        <div class="stat-sub">Duration of Session</div>
+                    </div>
+                    <button id="trigger-review-btn" class="btn btn-primary w-100" style="margin-top: 1rem;">
+                        <i class="ph ph-magnifying-glass"></i> Check Detailed Analysis
+                    </button>
+                </div>
+            </div>
+            
+        </div>
+    </main>
+    <script type="module" src="analytics.js"></script>
+</body>
+</html>

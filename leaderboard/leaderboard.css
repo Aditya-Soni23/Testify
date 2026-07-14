@@ -1,0 +1,51 @@
+.control-row {
+    padding: 1rem 1.5rem;
+    border-radius: 12px;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.select-dropdown {
+    padding: 0.6rem 1.2rem;
+    border-radius: 8px;
+    background: rgba(0,0,0,0.4);
+    border: 1px solid var(--border-color);
+    color: white;
+    font-size: 0.95rem;
+    outline: none;
+    cursor: pointer;
+}
+
+.leaderboard-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.leaderboard-table th {
+    background: rgba(255,255,255,0.01);
+    padding: 1.25rem 1.5rem;
+    color: var(--text-muted);
+    font-weight: 500;
+    text-align: left;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.leaderboard-table td {
+    padding: 1rem 1.5rem;
+    border-bottom: 1px solid rgba(255,255,255,0.02);
+}
+
+.rank-pill {
+    width: 28px; height: 28px; border-radius: 50%; display: flex;
+    align-items: center; justify-content: center; font-weight: 700; font-size: 0.85rem;
+}
+
+.rank-pill.gold { background: linear-gradient(135deg, #f59e0b, #d97706); color: black; }
+.rank-pill.silver { background: linear-gradient(135deg, #e2e8f0, #cbd5e1); color: black; }
+.rank-pill.bronze { background: linear-gradient(135deg, #b45309, #78350f); color: white; }
+.rank-pill.standard { background: rgba(255,255,255,0.05); color: var(--text-muted); }
+
+.profile-cell { display: flex; align-items: center; gap: 0.75rem; }
+.avatar-board { width: 36px; height: 36px; border-radius: 50%; object-fit: cover; background: rgba(255,255,255,0.1); }

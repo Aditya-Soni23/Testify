@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic Space Dashboard | Testify</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <link rel="stylesheet" href="../style.css">
+    <link rel="icon" type="image/png" sizes="32x32" href="/logo.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/logo.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="apple-touch-icon" href="/logo.png">
+    <link rel="stylesheet" href="dashboard.css">
+</head>
+<body class="dashboard-body">
+    <div id="global-announcement" class="announcement-banner">
+        <span id="announcement-text"></span>
+    </div>
+    <div class="diamond-signature">
+        <img src="/logo.png" alt="Diamond Logo">
+        <span>Built by <strong>DIAMOND</strong></span>
+    </div>
+
+    <!-- 1. ADDED OVERLAY ELEMENT -->
+    <div id="sidebar-overlay" class="sidebar-overlay"></div>
+
+    <aside class="sidebar glass">
+        <div class="sidebar-header"><i class="ph ph-atom logo-icon"></i> <span class="logo-text">Testify</span></div>
+        <ul class="nav-menu">
+            <li class="active" id="nav-dashboard"><i class="ph ph-squares-four"></i> Dashboard</li>
+            <li id="nav-tests"><i class="ph ph-exam"></i> Tests</li>
+            <li id="nav-polling"><i class="ph ph-chart-bar"></i> Polling</li>
+            <li id="nav-upload"><i class="ph ph-upload"></i> Upload</li>
+            <li id="nav-chat"><i class="ph ph-chats-circle"></i> Chat</li>
+            <li id="nav-tutorial"><i class="ph ph-graduation-cap"></i> Tutorial</li>
+        </ul>
+        <div class="sidebar-footer">
+            <button id="logout-btn" class="btn-logout" style="background:none; border:none; color:var(--text-muted); cursor:pointer;"><i class="ph ph-sign-out"></i> Logout</button>
+        </div>
+    </aside>
+
+    <main class="main-content">
+        <!-- 2. UPDATED HEADER WITH HAMBURGER BUTTON -->
+        <header class="topbar glass" style="padding:1.5rem; margin-bottom:2rem; display:flex; justify-content:space-between; align-items:center; gap:1rem;">
+            <div style="display:flex; align-items:center; gap:1.25rem;">
+                
+                <!-- Mobile Hamburger Button -->
+                <button id="mobile-menu-btn" class="hamburger-btn" aria-label="Toggle Menu">
+                    <i class="ph ph-list"></i>
+                </button>
+                
+                <div class="greeting">
+                    <h1 id="user-greeting">Welcome back, <span class="skeleton-text">User</span></h1>
+                    <p class="subtitle">TESTIFY - Built by Aditya Soni.</p>
+                </div>
+            </div>
+        </header>
+
+        <div class="dashboard-grid" style="display:grid; grid-template-columns:1fr 1fr; gap:1.5rem;">
+            <!-- Active Lifecycle Card -->
+            <div class="card glass" style="padding:2rem;">
+                <h2><i class="ph ph-git-branch" style="color:var(--accent-purple)"></i> Current Live Status</h2>
+                <div id="lifecycle-status-panel" style="margin-top:1.5rem;">
+                    <p style="color:var(--text-muted)">Connecting to database state engine instance variables...</p>
+                </div>
+            </div>
+
+            <!-- Global Chat Shortcut -->
+            <div class="card glass" style="padding:2rem;">
+                <h2><i class="ph ph-chats" style="color:var(--accent-blue)"></i> Recent Chat Activity</h2>
+                <div id="chat-shortcut-preview" style="margin-top:1rem; font-size:0.9rem; color:var(--text-muted);">
+                    Awaiting chat notifications logs...
+                </div>
+                <button class="btn btn-primary" onclick="window.location.href='/chat/chat.html'" style="margin-top:1.5rem; width:auto; padding:0.5rem 1rem;">Open Chat</button>
+            </div>
+        </div>
+    </main>
+    <script type="module" src="dashboard.js"></script>
+</body>
+</html>

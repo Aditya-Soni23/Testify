@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" sizes="32x32" href="/logo.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/logo.png">
+    <link rel="apple-touch-icon" href="/logo.png">
+    <title>How Testify Works | Cooperative Testing Platform</title>
+    <link rel="manifest" href="/manifest.json">
+    <style>
+        /* --- DESIGN SYSTEM & VARIABLES --- */
+        :root {
+            --bg-primary: #080B11;
+            --bg-surface: rgba(17, 24, 39, 0.45);
+            --border-glow: rgba(99, 102, 241, 0.15);
+            --border-light: rgba(255, 255, 255, 0.08);
+            
+            --text-primary: #F3F4F6;
+            --text-muted: #9CA3AF;
+            
+            --accent-glow: #6366F1;
+            --accent-cyan: #06B6D4;
+            --accent-emerald: #10B981;
+            
+            --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            --transition-smooth: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        /* --- GLOBAL RESET & STYLES --- */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-primary);
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(99, 102, 241, 0.05) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(6, 182, 212, 0.05) 0%, transparent 40%);
+            color: var(--text-primary);
+            font-family: var(--font-sans);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            overflow-x: hidden;
+            line-height: 1.5;
+        }
+
+        /* --- HEADER --- */
+        header {
+            width: 100%;
+            max-width: 1200px;
+            padding: 2rem 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            letter-spacing: -0.03em;
+            background: linear-gradient(135deg, #fff 0%, var(--text-muted) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--accent-glow);
+            border-radius: 50%;
+            box-shadow: 0 0 12px var(--accent-glow);
+        }
+
+        /* --- BACK BUTTON --- */
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.6rem 1.2rem;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--border-light);
+            border-radius: 12px;
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            backdrop-filter: blur(8px);
+            transition: var(--transition-smooth);
+            cursor: pointer;
+        }
+
+        .back-btn:hover {
+            color: var(--text-primary);
+            background: rgba(255, 255, 255, 0.06);
+            border-color: rgba(99, 102, 241, 0.4);
+            box-shadow: 0 0 20px rgba(99, 102, 241, 0.1);
+            transform: translateY(-1px);
+        }
+
+        .back-btn svg {
+            transition: var(--transition-smooth);
+        }
+
+        .back-btn:hover svg {
+            transform: translateX(-4px);
+            stroke: var(--accent-glow);
+        }
+
+        /* --- TUTORIAL HERO --- */
+        .tutorial-hero {
+            text-align: center;
+            margin: 3rem 1.5rem 2rem 1.5rem;
+            max-width: 800px;
+        }
+
+        .tagline {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            background: rgba(99, 102, 241, 0.1);
+            border: 1px solid rgba(99, 102, 241, 0.2);
+            color: #A5B4FC;
+            border-radius: 9999px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 1rem;
+        }
+
+        .tutorial-hero h1 {
+            font-size: 2.75rem;
+            font-weight: 800;
+            letter-spacing: -0.04em;
+            margin-bottom: 1rem;
+            line-height: 1.15;
+        }
+
+        .tutorial-hero p {
+            color: var(--text-muted);
+            font-size: 1.125rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            padding: 0 1.5rem 5rem 1.5rem;
+            display: grid;
+            grid-template-columns: 1.1fr 1.30fr;
+            gap: 3rem;
+            align-items: start;
+        }
+
+        /* --- LEFT COLUMN: INTERACTIVE STEPS --- */
+        .steps-wrapper {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .step-card {
+            background: var(--bg-surface);
+            border: 1px solid var(--border-light);
+            backdrop-filter: blur(16px);
+            border-radius: 16px;
+            padding: 1.75rem;
+            cursor: pointer;
+            transition: var(--transition-smooth);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            gap: 1.25rem;
+            text-align: left;
+        }
+
+        .step-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: transparent;
+            transition: var(--transition-smooth);
+        }
+
+        .step-card:hover {
+            border-color: rgba(255, 255, 255, 0.15);
+            transform: translateY(-2px);
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        .step-card.active {
+            border-color: var(--border-glow);
+            background: rgba(99, 102, 241, 0.04);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .step-card.active::before {
+            background: var(--accent-glow);
+            box-shadow: 0 0 15px var(--accent-glow);
+        }
+
+        .step-num {
+            font-size: 0.875rem;
+            font-weight: 700;
+            color: var(--accent-glow);
+            background: rgba(99, 102, 241, 0.1);
+            width: 28px;
+            height: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+            flex-shrink: 0;
+        }
+
+        .step-content h3 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+        }
+
+        .step-content p {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            line-height: 1.45;
+        }
+
+        /* --- RIGHT COLUMN: INTERACTIVE VISUALIZER --- */
+        .preview-pane {
+            position: sticky;
+            top: 2rem;
+            background: var(--bg-surface);
+            border: 1px solid var(--border-light);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(20px);
+            border-radius: 24px;
+            padding: 2.5rem;
+            min-height: 480px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            transition: var(--transition-smooth);
+            overflow: hidden;
+        }
+
+        .preview-pane::after {
+            content: '';
+            position: absolute;
+            top: -10%;
+            right: -10%;
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, rgba(99, 102, 241, 0.12) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        /* --- DYNAMIC MOCKUPS (Inside Visualizer) --- */
+        .mockup-container {
+            width: 100%;
+            display: none;
+            opacity: 0;
+            transform: scale(0.95);
+            transition: opacity 0.4s ease, transform 0.4s ease;
+        }
+
+        .mockup-container.active {
+            display: block;
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        /* Mockup 1: Poll UI */
+        .poll-box {
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+        }
+
+        .poll-item {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border-light);
+            border-radius: 12px;
+            padding: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            transition: var(--transition-smooth);
+        }
+
+        .poll-item:hover, .poll-item.selected {
+            border-color: var(--accent-glow);
+            background: rgba(99, 102, 241, 0.05);
+        }
+
+        .poll-meta h4 {
+            font-size: 0.95rem;
+            font-weight: 600;
+        }
+
+        .poll-meta p {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        .badge-pattern {
+            font-size: 0.75rem;
+            padding: 0.2rem 0.6rem;
+            border-radius: 6px;
+            font-weight: 700;
+            background: rgba(6, 182, 212, 0.15);
+            color: var(--accent-cyan);
+            border: 1px solid rgba(6, 182, 212, 0.2);
+        }
+
+        /* Mockup 2: Countdown Timer */
+        .timer-display {
+            text-align: center;
+            padding: 2rem 0;
+        }
+
+        .countdown-digits {
+            font-family: monospace;
+            font-size: 3.5rem;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+            background: linear-gradient(to right, #fff, var(--text-muted));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+        }
+
+        .timer-status {
+            color: var(--accent-cyan);
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            margin-top: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .pulse-dot {
+            width: 8px;
+            height: 8px;
+            background-color: var(--accent-cyan);
+            border-radius: 50%;
+            animation: pulse-glow 1.5s infinite ease-in-out;
+        }
+
+        /* Mockup 3: Question Uploader */
+        .upload-zone {
+            border: 2px dashed var(--border-light);
+            border-radius: 16px;
+            padding: 2.5rem 1.5rem;
+            text-align: center;
+            transition: var(--transition-smooth);
+            cursor: pointer;
+        }
+
+        .upload-zone:hover {
+            border-color: var(--accent-glow);
+            background: rgba(99, 102, 241, 0.02);
+        }
+
+        .upload-slots {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .slot {
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            border: 1.5px solid var(--border-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: var(--text-muted);
+            transition: var(--transition-smooth);
+        }
+
+        .slot.filled {
+            background: rgba(16, 185, 129, 0.15);
+            border-color: var(--accent-emerald);
+            color: var(--accent-emerald);
+        }
+
+        /* Mockup 4: Exam & Analysis Portal */
+        .analytics-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--border-light);
+            border-radius: 16px;
+            padding: 1.5rem;
+        }
+
+        .analytics-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.25rem;
+            border-bottom: 1px solid var(--border-light);
+            padding-bottom: 0.75rem;
+        }
+
+        .stat-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .stat-box {
+            background: rgba(0, 0, 0, 0.2);
+            padding: 1rem;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.03);
+        }
+
+        .stat-label {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+        }
+
+        .stat-val {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-top: 0.25rem;
+        }
+
+        /* --- ANIMATIONS --- */
+        @keyframes pulse-glow {
+            0%, 100% { transform: scale(0.8); opacity: 0.5; box-shadow: 0 0 0 0 rgba(6, 182, 212, 0.4); }
+            50% { transform: scale(1.2); opacity: 1; box-shadow: 0 0 12px 4px rgba(6, 182, 212, 0.4); }
+        }
+
+        /* --- RESPONSIVE ADJUSTMENTS --- */
+        @media (max-width: 968px) {
+            .container {
+                grid-template-columns: 1fr;
+            }
+            .preview-pane {
+                position: static;
+                min-height: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">
+            TESTIFY <span class="logo-dot"></span>
+        </div>
+        <!-- Sleek Glassmorphic Back Button -->
+        <a href="/dashboard/dashboard.html" class="back-btn">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="19" y1="12" x2="5" y2="12"></line>
+                <polyline points="12 19 5 12 12 5"></polyline>
+            </svg>
+            Back to Dashboard
+        </a>
+    </header>
+
+    <div class="tutorial-hero">
+        <span class="tagline">The Loop of Collective Learning</span>
+        <h1>How Testify Operates</h1>
+        <p>A completely democratized testing sandbox built for students, curated by students. Experience the seamless workflow below.</p>
+    </div>
+
+    <div class="container">
+        
+        <!-- Left Column: Step List -->
+        <div class="steps-wrapper">
+            
+            <div class="step-card active" data-step="1">
+                <div class="step-num">1</div>
+                <div class="step-content">
+                    <h3>Democratized Polling</h3>
+                    <p>Enter the sandbox. Cast your votes on which Subject, Chapter, Target Pattern (JEE Mains or Advanced), Question Pool Size, and Time limits you want to practice next.</p>
+                </div>
+            </div>
+
+            <div class="step-card" data-step="2">
+                <div class="step-num">2</div>
+                <div class="step-content">
+                    <h3>The 5-Hour Lock-In</h3>
+                    <p>When any 3 students cast initial votes on a set of parameters, a countdown timer of exactly 5 hours is triggered. Anyone else can jump in to vote and swing the final test profile before the lock-in.</p>
+                </div>
+            </div>
+
+            <div class="step-card" data-step="3">
+                <div class="step-num">3</div>
+                <div class="step-content">
+                    <h3>Crowdsourced Uploads</h3>
+                    <p>Once parameters freeze, the sandbox opens up the upload window. Each student can directly contribute up to 5 target questions to build the custom exam paper.</p>
+                </div>
+            </div>
+
+            <div class="step-card" data-step="4">
+                <div class="step-num">4</div>
+                <div class="step-content">
+                    <h3>Launch & Infinite Loop</h3>
+                    <p>The system generates, compiles, and deploys the test directly into the practice dashboard. Attempt it at your convenience (zero strict due dates), unlock full visual performance analytics, comparative rankings, and immediately start a new poll.</p>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Right Column: Interactive Visualizer Pane -->
+        <div class="preview-pane" id="previewPane">
+            
+            <!-- Mockup 1: Polling Interface -->
+            <div class="mockup-container active" id="mockup-1">
+                <div class="poll-box">
+                    <div style="margin-bottom: 0.5rem;">
+                        <span style="font-size: 0.75rem; color: var(--accent-glow); font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase;">Sandbox Polls Open</span>
+                        <h3 style="margin-top: 0.25rem; font-weight: 700;">Select Test Configuration</h3>
+                    </div>
+                    <div class="poll-item selected">
+                        <div class="poll-meta">
+                            <h4>Physics: Electromagnetism</h4>
+                            <p>30 Questions • 90 Mins</p>
+                        </div>
+                        <span class="badge-pattern">JEE ADVANCED</span>
+                    </div>
+                    <div class="poll-item">
+                        <div class="poll-meta">
+                            <h4>Chemistry: Organic Synthesis</h4>
+                            <p>25 Questions • 60 Mins</p>
+                        </div>
+                        <span class="badge-pattern">JEE MAINS</span>
+                    </div>
+                    <div class="poll-item">
+                        <div class="poll-meta">
+                            <h4>Mathematics: Calculus II</h4>
+                            <p>30 Questions • 90 Mins</p>
+                        </div>
+                        <span class="badge-pattern">JEE ADVANCED</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mockup 2: Lock-In Timer Interface -->
+            <div class="mockup-container" id="mockup-2">
+                <div class="timer-display">
+                    <span style="font-size: 0.8rem; color: var(--text-muted); font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em;">Minimum 3 Votes Reached!</span>
+                    <h2 style="font-size: 1.5rem; font-weight: 700; margin: 0.5rem 0 1.5rem 0;">Voting Window Closes In:</h2>
+                    <div class="countdown-digits" id="timerDigits">05:00:00</div>
+                    <div class="timer-status">
+                        <span class="pulse-dot"></span>
+                        <span>Accepting Late Votes... Parameters updating live</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mockup 3: Crowdsourced Uploads Interface -->
+            <div class="mockup-container" id="mockup-3">
+                <div style="margin-bottom: 1.5rem; text-align: center;">
+                    <h3 style="font-weight: 700;">Contribute to Test Pool</h3>
+                    <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.25rem;">Upload high-yield problems to insert into this custom module</p>
+                </div>
+                <div class="upload-zone">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--accent-glow); margin-bottom: 0.5rem;"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+                    <p style="font-size: 0.9rem; font-weight: 600;">Drag and drop single-question screenshots</p>
+                    <p style="font-size: 0.75rem; color: var(--text-muted); margin-top: 0.25rem;">Supports JPEG, PNG, PDF up to 5MB</p>
+                </div>
+                <div class="upload-slots">
+                    <div class="slot filled">✓</div>
+                    <div class="slot filled">✓</div>
+                    <div class="slot">3</div>
+                    <div class="slot">4</div>
+                    <div class="slot">5</div>
+                </div>
+            </div>
+
+            <!-- Mockup 4: Exam & Analysis Portal -->
+            <div class="mockup-container" id="mockup-4">
+                <div class="analytics-card">
+                    <div class="analytics-header">
+                        <div>
+                            <h3 style="font-size: 1.1rem; font-weight: 700;">Test-04 Results</h3>
+                            <p style="font-size: 0.75rem; color: var(--text-muted);">Mains Pattern • Electromagnetism</p>
+                        </div>
+                        <span style="font-size: 0.75rem; font-weight: 600; color: var(--accent-emerald); background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.2); padding: 0.25rem 0.5rem; border-radius: 6px;">COMPLETED</span>
+                    </div>
+                    <div class="stat-grid">
+                        <div class="stat-box">
+                            <div class="stat-label">Your Score</div>
+                            <div class="stat-val" style="color: var(--accent-cyan);">245 <span style="font-size: 0.85rem; color: var(--text-muted);">/ 300</span></div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="stat-label">Peer Rank</div>
+                            <div class="stat-val">04 <span style="font-size: 0.85rem; color: var(--text-muted);">/ 142</span></div>
+                        </div>
+                        <div class="stat-box" style="grid-column: span 2;">
+                            <div class="stat-label" style="margin-bottom: 0.5rem;">Accuracy Breakdown</div>
+                            <div style="background: rgba(255,255,255,0.05); height: 8px; border-radius: 9999px; overflow: hidden;">
+                                <div style="background: var(--accent-emerald); width: 82%; height: 100%;"></div>
+                            </div>
+                            <div style="display: flex; justify-content: space-between; font-size: 0.7rem; color: var(--text-muted); margin-top: 0.25rem;">
+                                <span>82% Correct</span>
+                                <span>18% Incomplete/Wrong</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const stepCards = document.querySelectorAll('.step-card');
+            const mockups = document.querySelectorAll('.mockup-container');
+            
+            // --- TAB SWITCH CONTROLLER ---
+            stepCards.forEach(card => {
+                card.addEventListener('click', () => {
+                    const stepNumber = card.getAttribute('data-step');
+                    
+                    // Clear previous active states
+                    stepCards.forEach(c => c.classList.remove('active'));
+                    mockups.forEach(m => m.classList.remove('active'));
+                    
+                    // Set current active states
+                    card.classList.add('active');
+                    document.getElementById(`mockup-${stepNumber}`).classList.add('active');
+                });
+            });
+
+            // --- SIMULATED COUNTDOWN TIMER (Step 2 Mockup) ---
+            let duration = 5 * 60 * 60; // 5 hours in seconds
+            const timerDigits = document.getElementById('timerDigits');
+
+            setInterval(() => {
+                if (duration <= 0) {
+                    duration = 5 * 60 * 60; // loop back for demo sanity
+                }
+                duration--;
+
+                const hours = Math.floor(duration / 3600);
+                const minutes = Math.floor((duration % 3600) / 60);
+                const seconds = duration % 60;
+
+                const pad = (num) => String(num).padStart(2, '0');
+                timerDigits.textContent = `${pad(hours)}:${pad(minutes)}:${pad(seconds)}`;
+            }, 1000);
+        });
+    </script>
+</body>
+</html>

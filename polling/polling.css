@@ -1,0 +1,41 @@
+.polling-workspace {
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+}
+@media (max-width: 968px) {
+    .polling-workspace { grid-template-columns: 1fr; }
+}
+.card { padding: 2rem; }
+.form-group { margin-bottom: 1.25rem; }
+.form-group label { display: block; margin-bottom: 0.5rem; font-size: 0.9rem; color: var(--text-muted); }
+.form-group select, .form-group input {
+    width: 100%; padding: 0.75rem; background: rgba(255,255,255,0.03); border: 1px solid var(--glass-border);
+    border-radius: 8px; color: white; font-size: 0.95rem; box-sizing: border-box;
+}
+.form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+.btn { width: 100%; padding: 0.85rem; border: none; border-radius: 8px; font-weight: 600; cursor: pointer; }
+.btn-primary { background: linear-gradient(135deg, var(--accent-purple), var(--accent-blue)); color: white; }
+.timer-badge { display: flex; align-items: center; gap: 0.5rem; background: rgba(239, 68, 68, 0.15); border: 1px solid rgba(239, 68, 68, 0.3); padding: 0.5rem 1rem; border-radius: 30px; color: var(--error); font-weight: 700; }
+.progress-bar-wrapper { background: rgba(255,255,255,0.05); height: 10px; border-radius: 5px; overflow: hidden; margin: 0.75rem 0; }
+.progress-fill { height: 100%; background: var(--accent-purple); transition: width 0.4s ease; }
+.ledger-box { max-height: 250px; overflow-y: auto; }
+.voter-row { display: flex; justify-content: space-between; padding: 0.65rem; border-bottom: 1px solid var(--glass-border); font-size: 0.85rem; }
+.hidden { display: none !important; }
+#poll-subject{
+    color: white;
+    background-color: black;
+}
+#poll-count{
+    color: white;
+    background-color: black;
+}
+#poll-duration{
+    color: white;
+    background-color: black;
+}
+#poll-mode{
+    color: white;
+    background-color: black;
+}

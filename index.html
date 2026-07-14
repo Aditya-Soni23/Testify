@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Testify | Collaborative JEE Examinations</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <link rel="icon" type="image/png" sizes="32x32" href="logo.png">
+<link rel="icon" type="image/png" sizes="16x16" href="logo.png">
+<link rel="manifest" href="/manifest.json">
+<meta name="theme-color" content="#1a1a2e">
+<link rel="apple-touch-icon" href="logo.png">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="animated-bg"></div>
+    
+    <nav class="navbar glass">
+        <div class="logo">
+            <i class="ph ph-atom"></i> Testify
+        </div>
+        <a href="/" class="diamond-brand">
+            <img src="logo.png" alt="Diamond Logo">
+            <span>Built by <strong>DIAMOND</strong>~Aditya Soni</span>
+        </a>
+        <div class="nav-links">
+            <button id="nav-login-btn" class="btn btn-secondary">Sign In</button>
+        </div>
+    </nav>
+
+    <main class="hero">
+        <div class="hero-content">
+            <div class="badge glass">Introducing Collaborative Testing</div>
+            <h1 class="gradient-text">Master JEE Together.</h1>
+            <p class="hero-subtitle">
+                The first platform where students vote for examinations, curate high-quality questions, and attempt live tests as a community. Experience real-time leaderboards and advanced analytics.
+            </p>
+            <div class="hero-actions">
+                <button id="hero-login-btn" class="btn btn-primary">
+                    <i class="ph ph-google-logo"></i> Continue with Google
+                </button>
+            </div>
+        </div>
+        
+        <div class="features-grid">
+            <div class="feature-card glass">
+                <i class="ph ph-users-three"></i>
+                <h3>Collaborative Voting</h3>
+                <p>Decide what to test next. Vote on upcoming examination topics and formats with your peers.</p>
+            </div>
+            <div class="feature-card glass">
+                <i class="ph ph-upload-simple"></i>
+                <h3>Curate Questions</h3>
+                <p>Submit high-yield JEE questions. Build a premium community-driven question bank.</p>
+            </div>
+            <div class="feature-card glass">
+                <i class="ph ph-chart-line-up"></i>
+                <h3>Live Analytics</h3>
+                <p>Attempt tests together in real-time. See live leaderboards and detailed performance metrics.</p>
+            </div>
+        </div>
+    </main>
+
+    <!-- Real Name Modal (Hidden by default) -->
+    <div id="name-modal" class="modal-overlay hidden">
+        <div class="modal-content glass">
+            <i class="ph ph-identification-card modal-icon"></i>
+            <h2>Complete Your Profile</h2>
+            <p class="warning-text"><i class="ph ph-warning-circle"></i> This must be your real full name. It can only be changed by the administrator later.</p>
+            <form id="name-form">
+                <input type="text" id="real-name-input" placeholder="e.g. Rahul Sharma" required autocomplete="name">
+                <button type="submit" class="btn btn-primary w-100" id="save-name-btn">Save & Continue</button>
+            </form>
+        </div>
+    </div>
+
+    <script type="module" src="main.js"></script>
+</body>
+</html>

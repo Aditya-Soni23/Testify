@@ -1,0 +1,76 @@
+/* =========================================
+   GLOBAL MOBILE NAVIGATION (mobile.css)
+   ========================================= */
+
+/* --- 1. Base Styles (Desktop First - Hidden) --- */
+.hamburger-btn {
+    display: none;
+    background: none;
+    border: none;
+    color: #ffffff;
+    font-size: 1.8rem;
+    cursor: pointer;
+    padding: 0;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s;
+}
+
+.hamburger-btn:active {
+    transform: scale(0.9);
+}
+
+.sidebar-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    z-index: 998;
+}
+
+/* --- 2. Mobile Overrides (Triggered under 768px) --- */
+@media (max-width: 768px) {
+    /* Show the hamburger button */
+    .hamburger-btn {
+        display: flex;
+    }
+
+    /* Convert sidebar into a sleek sliding glass drawer */
+    .sidebar {
+        position: fixed;
+        top: 0;
+        left: -100%; /* Fully off-screen by default */
+        width: 280px; 
+        height: 100vh; 
+        border-right: 1px solid var(--border-color);
+        flex-direction: column;
+        align-items: stretch;
+        justify-content: flex-start;
+        padding: 0;
+        z-index: 999;
+        transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        
+        /* Solid glassmorphism background */
+        background: rgba(26, 26, 46, 0.98); 
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+    }
+
+    /* Ensure lists and footer are visible inside the mobile drawer */
+    .nav-menu { display: block !important; padding: 1rem; }
+    .sidebar-footer { display: block !important; padding: 1.5rem; margin-top: auto; }
+
+    /* JavaScript Toggle Classes */
+    .sidebar.active-mobile {
+        left: 0; /* Slide into view */
+    }
+    
+    .sidebar-overlay.active-mobile {
+        display: block; /* Show dark background overlay */
+    }
+}

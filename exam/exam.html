@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JEE Testing Terminal | Testify</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <link rel="stylesheet" href="../style.css">
+    <link rel="icon" type="image/png" sizes="32x32" href="/logo.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/logo.png">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="apple-touch-icon" href="/logo.png">
+    <link rel="stylesheet" href="exam.css">
+</head>
+<body>
+    <!-- Instructions Layer View Canvas -->
+    <div id="instructions-container" class="workspace-wrapper glass-blur">
+        <div class="instructions-panel glass">
+            <h2 id="instr-title">Loading...</h2>
+            <div class="metrics-strip">
+                <div class="m-box"><span id="instr-time">-</span><p>Minutes</p></div>
+                <div class="m-box"><span id="instr-count">-</span><p>Questions</p></div>
+                <div class="m-box"><span id="instr-marks">-</span><p>Max Marks</p></div>
+            </div>
+            
+            <div class="instructions-body">
+                <h3>Standard Operational Examination Rules</h3>
+                <ul>
+                    <li>The clock will be set at the server. A countdown timer at the top right of the viewport displays the remaining time left to complete the examination.</li>
+                    <li><strong>Marking Rubric:</strong> Each correct response awards <span class="highlight">+4</span> marks. Incorrect selections trigger an execution penalty of <span class="highlight">-1</span> mark for multiple-choice questions. Numerical questions incur zero negative penalty unless designated otherwise.</li>
+                    <li>Responses are automatically saved asynchronously directly to the platform backend database infrastructure upon clicking navigation nodes.</li>
+                    <li>If there are questions with multiple correct asnwers then advance pattern marking scheme will be applied.</li>
+                    <li>If the test fails to start please untick the check box and tick it once again.</li>
+                </ul>
+                <div class="divider"></div>
+                <label class="checkbox-container">
+                    <input type="checkbox" id="accept-rules">
+                    <span class="checkmark"></span>
+                    I have read, processed, and fully understood all absolute test operational execution policies specified above.
+                </label>
+            </div>
+            <div class="panel-actions">
+                <button id="begin-exam-btn" class="btn btn-primary" disabled>Begin Examination</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Active Interface Architecture Container -->
+    <div id="exam-workspace" class="exam-layout hidden">
+        <header class="exam-header glass">
+            <div class="header-left">
+                <span id="workspace-test-title" class="exam-name">Loading Examination...</span>
+                <span id="subject-tag" class="subject-badge">General</span>
+            </div>
+            <div class="header-right">
+                <div class="timer-display"><i class="ph ph-timer"></i> <span id="time-countdown">00:00:00</span></div>
+                <div class="candidate-info">
+                    <img id="candidate-img" src="" alt="" class="avatar-mini">
+                    <span id="candidate-name">Loading profile...</span>
+                </div>
+            </div>
+        </header>
+
+        <div class="exam-core">
+            <!-- Delivery Context Box Panel -->
+            <section class="question-canvas glass">
+                <div class="canvas-top-bar">
+                    <span class="q-num-header">Question <span id="active-q-index">-</span></span>
+                    <span class="q-type-badge" id="active-q-type">-</span>
+                </div>
+                <div class="question-delivery-box">
+                    <p id="question-text-body" class="question-text">Acquiring problem text node...</p>
+                    <div id="interaction-options-wrapper" class="options-area">
+                        <!-- Rendered by controller runtime engine instances -->
+                    </div>
+                </div>
+                <div class="canvas-footer">
+                    <button class="btn btn-secondary" id="btn-prev">Previous</button>
+                    <button class="btn btn-secondary" id="btn-mark">Mark For Review</button>
+                    <button class="btn btn-secondary" id="btn-clear">Clear Response</button>
+                    <button class="btn btn-primary" id="btn-save-next">Save & Next</button>
+                </div>
+            </section>
+
+            <!-- Navigation Control Cluster Pane -->
+            <aside class="palette-sidebar glass">
+                <h3>Question Status Grid</h3>
+                <div class="palette-grid" id="palette-nodes-container" style="display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 20px;"></div>
+                
+                <div class="legend-box" style="display: flex; flex-direction: column; gap: 8px; margin-bottom: 20px;">
+                    <div class="lg-item"><span class="badge-status nv" id="count-not-visited" style="display:inline-block; width:20px; height:20px; text-align:center; background:#e0e0e0; color:#000; border-radius:50%; font-size:0.8rem; line-height:20px;">0</span> Not Visited</div>
+                    <div class="lg-item"><span class="badge-status v" id="count-visited" style="display:inline-block; width:20px; height:20px; text-align:center; background:#ff3b30; color:#fff; border-radius:50%; font-size:0.8rem; line-height:20px;">0</span> Visited</div>
+                    <div class="lg-item"><span class="badge-status ans" id="count-answered" style="display:inline-block; width:20px; height:20px; text-align:center; background:#34c759; color:#fff; border-radius:50%; font-size:0.8rem; line-height:20px;">0</span> Answered</div>
+                    <div class="lg-item"><span class="badge-status mfr" id="count-marked" style="display:inline-block; width:20px; height:20px; text-align:center; background:#5856d6; color:#fff; border-radius:50%; font-size:0.8rem; line-height:20px;">0</span> Marked for Review</div>
+                    <div class="lg-item"><span class="badge-status amf" id="count-marked-answered" style="display:inline-block; width:20px; height:20px; text-align:center; background:#5856d6; color:#fff; border:2px solid #34c759; border-radius:50%; font-size:0.8rem; line-height:16px;">0</span> Answered & Marked</div>
+                </div>
+
+                <button class="btn btn-danger w-100" id="btn-submit-exam" style="margin-top:auto">Submit Assessment</button>
+            </aside>
+        </div>
+    </div>
+
+    <!-- Confirmation Modal -->
+    <div id="submit-confirm-modal" class="modal-overlay hidden">
+        <div class="modal-content glass">
+            <h2>Verify State Metrics</h2>
+            <div class="summary-matrix">
+                <div class="matrix-cell">Answered: <span id="m-ans">0</span></div>
+                <div class="matrix-cell">Review: <span id="m-rev">0</span></div>
+                <div class="matrix-cell">Remaining: <span id="m-rem">0</span></div>
+            </div>
+            <p style="margin: 1.5rem 0; font-size: 0.9rem; color: var(--text-muted)">Are you sure you want to finalize this exam session? You cannot re-enter.</p>
+            <div style="display:flex; gap:1rem;">
+                <button class="btn btn-secondary w-100" id="confirm-cancel">Back</button>
+                <button class="btn btn-primary w-100" id="confirm-finalize" style="background:var(--primary)">Commit Submission</button>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="exam.js"></script>
+</body>
+</html>

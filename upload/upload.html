@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Question Studio | Testify</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <script src="https://cdn.jsdelivr.net/npm/tesseract.js@4/dist/tesseract.min.js"></script>
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="upload.css">
+    <link rel="icon" type="image/png" sizes="32x32" href="/logo.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/logo.png">
+    <link rel="apple-touch-icon" href="/logo.png">
+    <link rel="stylesheet" href="../mobile/mobile.css">
+    <script src="../mobile/mobile.js"></script>
+    <link rel="manifest" href="/manifest.json">
+</head>
+<body class="dashboard-body">
+    <div id="sidebar-overlay" class="sidebar-overlay"></div>
+    <aside class="sidebar glass">
+        <div class="sidebar-header"><i class="ph ph-atom logo-icon"></i> <span class="logo-text">Testify</span></div>
+        <ul class="nav-menu">
+            <li id="nav-dashboard"><i class="ph ph-squares-four"></i> Dashboard</li>
+            <li id="nav-tests"><i class="ph ph-exam"></i> Tests</li>
+            <li id="nav-polling"><i class="ph ph-chart-bar"></i> Polling</li>
+            <li class="active" id="nav-upload"><i class="ph ph-upload"></i> Upload</li>
+            <li id="nav-chat"><i class="ph ph-chats-circle"></i> Chat</li>
+        </ul>
+    </aside>
+
+    <main class="main-content">
+        <button id="mobile-menu-btn" class="hamburger-btn" aria-label="Toggle Menu">
+        <i class="ph ph-list"></i>
+    </button>
+        <header class="upload-progress-card glass">
+            
+            <div>
+                <h2>Upload your questions here!</h2>
+                <p id="target-spec-label">Loading...</p>
+            </div>
+            <div class="progress-radial-group">
+                <div class="bar-container">
+                    <div id="upload-progress-fill" class="fill-bar" style="width: 0%"></div>
+                </div>
+                <div style="display:flex; justify-content:space-between; font-size:0.85rem; color:var(--text-muted); margin-top:0.4rem;">
+                    <span id="progress-numeric-lbl">0 / 0 Target Units</span>
+                    <span id="completion-estimate">Est. Target TBD</span>
+                </div>
+            </div>
+        </header>
+
+        <div class="upload-split-workspace">
+            <section class="card glass">
+                <h3>Draft New Question</h3>
+                <div class="tab-header">
+                    <button class="tab-btn active" id="tab-manual">Manually Upload</button>
+                    <button class="tab-btn" id="tab-ocr">Scroll below for uploading image</button>
+                </div>
+
+                <form id="question-form" style="margin-top:1.5rem;">
+                    <div class="form-group">
+                        <label>Question?</label>
+                        <textarea id="q-text" rows="3" placeholder="Enter your question here..." required></textarea>
+                    </div>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label>Question Type</label>
+                            <select id="q-type">
+                                <option value="MCQ">Single Choice (MCQ)</option>
+                                <option value="MCQ-Multi">Multiple Correct (MCQ-Multi)</option>
+                                <option value="Numerical">Numerical Valuation Type</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Target Sub-Chapter Assignment</label>
+                            <input type="text" id="q-chapter" placeholder="e.g. Electrostatics" required>
+                        </div>
+                    </div>
+
+                    <div id="mcq-options-block">
+                        <div class="form-grid">
+                            <input type="text" id="opt-a" placeholder="Option A Content" required>
+                            <input type="text" id="opt-b" placeholder="Option B Content" required>
+                            <input type="text" id="opt-c" placeholder="Option C Content" required>
+                            <input type="text" id="opt-d" placeholder="Option D Content" required>
+                        </div>
+                    </div>
+
+                    <div class="form-grid" style="margin-top:1rem;">
+                        <div class="form-group">
+                            <label>Correct Answer key Matrix</label>
+                            <input type="text" id="q-correct" placeholder="A, B, C, D (or multiple for Multi-MCQ or Numerical)" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Difficulty Level</label>
+                            <select id="q-diff">
+                                <option value="Easy">Easy</option>
+                                <option value="Medium">Medium</option>
+                                <option value="Hard">Hard</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Solution Explanation</label>
+                        <textarea id="q-sol" rows="2" placeholder="Optional Answer Solution, you may leave it blank...."></textarea>
+                    </div>
+
+                    <button type="submit" id="submit-btn" class="btn btn-secondary">Submit</button>
+                    <button type="button" id="cancel-edit-btn" class="btn btn-danger hidden" style="margin-top: 0.5rem;">Cancel Edit</button>
+                </form>
+
+                <div id="ocr-module-panel" class="hidden" style="margin-top: 1.5rem;">
+                    <div class="ocr-dropzone" id="ocr-trigger" style="cursor: pointer; text-align: center; padding: 2rem; border: 2px dashed var(--accent-purple); border-radius: 8px;">
+                        <i class="ph ph-cloud-arrow-up" style="font-size:3rem; color:var(--accent-purple)"></i>
+                        <p id="ocr-status-text">Click to Upload Image for Processing</p>
+                        <input type="file" id="ocr-file-input" accept="image/*" class="hidden" style="display: none;">
+                    </div>
+                </div>
+            </section>
+
+            <section class="card glass">
+                <h3>Your Contributed Allocations (<span id="my-count-badge">0</span>/5)</h3>
+                <div id="personal-questions-feed" class="feed-container"></div>
+            </section>
+        </div>
+    </main>
+    <script type="module" src="upload.js"></script>
+</body>
+</html>

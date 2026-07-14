@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Global Leaderboards | Testify</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="../dashboard/dashboard.css">
+    <link rel="stylesheet" href="leaderboard.css">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="icon" type="image/png" sizes="32x32" href="/logo.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/logo.png">
+<link rel="apple-touch-icon" href="/logo.png">
+<link rel="stylesheet" href="../mobile/mobile.css">
+    <script src="../mobile/mobile.js"></script>
+</head>
+<body class="dashboard-body">
+    <div id="sidebar-overlay" class="sidebar-overlay"></div>
+    <aside class="sidebar glass">
+        <div class="sidebar-header">
+            <i class="ph ph-atom logo-icon"></i> <span class="logo-text">Testify</span>
+        </div>
+        <ul class="nav-menu">
+            <li onclick="window.location.href='/dashboard/dashboard.html'"><i class="ph ph-squares-four"></i> Dashboard</li>
+            <li onclick="window.location.href='/tests/tests.html'"><i class="ph ph-exam"></i> Tests</li>
+            <li class="active"><i class="ph ph-trophy"></i> Leaderboard</li>
+        </ul>
+    </aside>
+
+    <main class="main-content">
+        <header class="topbar glass">
+            <button id="mobile-menu-btn" class="hamburger-btn" aria-label="Toggle Menu">
+                <i class="ph ph-list"></i>
+            </button>
+            <div class="greeting">
+                <h1>Leaderboard</h1>
+                <p class="subtitle">Rankings dynamically updated across the community. Sorted by highest score, then by minimal time consumed.</p>
+            </div>
+        </header>
+
+        <div class="control-row glass">
+            <label for="test-select-filter"><i class="ph ph-funnel"></i> Select Assessment Scope: </label>
+            <select id="test-select-filter" class="select-dropdown">
+                <!-- Runtime populates target targets dynamically -->
+            </select>
+        </div>
+
+        <div class="table-container glass">
+            <table class="leaderboard-table">
+                <thead>
+                    <tr>
+                        <th style="width: 80px;">Rank</th>
+                        <th>Candidate Profile</th>
+                        <th>Absolute Score</th>
+                        <th>Accuracy</th>
+                        <th>Completion Duration</th>
+                    </tr>
+                </thead>
+                <tbody id="leaderboard-target-body">
+                    <!-- Dynamic rendering engine inputs -->
+                </tbody>
+            </table>
+        </div>
+    </main>
+    <script type="module" src="leaderboard.js"></script>
+</body>
+</html>

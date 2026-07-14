@@ -1,0 +1,61 @@
+.tests-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 3rem;
+}
+
+.test-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 1.75rem;
+    border-radius: 16px;
+    background: linear-gradient(145deg, rgba(30, 30, 40, 0.4), rgba(15, 15, 20, 0.4));
+    border: 1px solid var(--border-color);
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.test-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(99, 102, 241, 0.4);
+    box-shadow: 0 12px 30px rgba(0,0,0,0.4);
+}
+
+.card-meta-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.test-num { font-size: 0.8rem; text-transform: uppercase; color: var(--accent-blue); font-weight: 600; letter-spacing: 0.05em; }
+.status-tag { padding: 4px 10px; border-radius: 20px; font-size: 0.75rem; font-weight: 600; }
+.status-tag.live { background: rgba(16, 185, 129, 0.15); color: #10b981; }
+.status-tag.completed { background: rgba(239, 68, 68, 0.15); color: #ef4444; }
+.status-tag.attempted { background: rgba(59, 130, 246, 0.15); color: #3b82f6; }
+
+.test-card h3 { font-size: 1.3rem; font-weight: 600; margin-bottom: 0.5rem; color: white; }
+.chapters-list { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1.5rem; line-height: 1.4; }
+
+.stats-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(255,255,255,0.05);
+}
+
+.stat-item { display: flex; align-items: center; gap: 0.5rem; font-size: 0.85rem; color: var(--text-muted); }
+.stat-item i { color: var(--accent-purple); font-size: 1.1rem; }
+
+/* History Framework */
+.history-section h2 { font-size: 1.4rem; margin-bottom: 1.25rem; display: flex; align-items: center; gap: 0.5rem; }
+.table-container { border-radius: 14px; overflow: hidden; width: 100%; }
+.history-table { width: 100%; border-collapse: collapse; text-align: left; font-size: 0.95rem; }
+.history-table th { background: rgba(255,255,255,0.02); padding: 1rem 1.5rem; color: var(--text-muted); font-weight: 500; border-bottom: 1px solid var(--border-color); }
+.history-table td { padding: 1.2rem 1.5rem; border-bottom: 1px solid rgba(255,255,255,0.03); color: white; }
+.history-table tr:last-child td { border: none; }
+
+.test-skeleton { height: 280px; position: relative; overflow: hidden; }
