@@ -92,8 +92,8 @@ function listenToSystemStatesLifecycle() {
             statusPanel.innerHTML = `
                 <div style="border-left:4px solid var(--success); padding-left:1rem;">
                     <h4 style="margin:0; color:white;">Status: Exam Module Compiled & Live</h4>
-                    <p style="font-size:0.85rem; color:var(--text-muted); margin-top:0.25rem;">The generated exam is live on servers.</p>
-                    <button class="btn" onclick="window.location.href='../tests/tests.html'" style="width:auto; padding:0.4rem 0.8rem; font-size:0.8rem; background:var(--success); color:white; margin-top:0.5rem; border:none; border-radius:4px; cursor:pointer;">Launch Exam</button>
+                    <p style="font-size:0.85rem; color:var(--text-muted); margin-top:0.25rem;">Waiting.......</p>
+                    <button class="btn" onclick="window.location.href='../tests/tests.html'" style="width:auto; padding:0.4rem 0.8rem; font-size:0.8rem; background:var(--success); color:white; margin-top:0.5rem; border:none; border-radius:4px; cursor:pointer;">Test Portal/button>
                 </div>
             `;
         }
