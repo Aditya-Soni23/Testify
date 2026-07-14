@@ -16,7 +16,7 @@ export async function handleGoogleLogin() {
         if (dbUser && dbUser.name) {
             // User exists, redirect
             showToast('Welcome back!', 'success');
-            window.location.href = '/dashboard/dashboard.html';
+            window.location.href = 'dashboard/dashboard.html';
         } else {
             // New user: Prompt for real name
             triggerNamePrompt(user);
