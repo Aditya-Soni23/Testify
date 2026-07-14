@@ -4,7 +4,8 @@ import { getUserData, createUserData } from './database.js';
 import { showToast } from './utils.js';
 
 const provider = new GoogleAuthProvider();
-
+const isGitHubPages = window.location.hostname.includes('github.io');
+const repoName = isGitHubPages ? `/${window.location.pathname.split('/')[1]}` : '';
 export async function handleGoogleLogin() {
     try {
         const result = await signInWithPopup(auth, provider);
@@ -16,7 +17,7 @@ export async function handleGoogleLogin() {
         if (dbUser && dbUser.name) {
             // User exists, redirect
             showToast('Welcome back!', 'success');
-            window.location.href = 'dashboard/dashboard.html';
+            window.location.href = `${window.location.origin}${repoName}/dashboard/dashboard.html`;
         } else {
             // New user: Prompt for real name
             triggerNamePrompt(user);
